@@ -17,6 +17,19 @@ exports.register = async (req, res, next) => {
 
 
 
+exports.getAllUsers = async (req, res, next) => {
+    // const { email, password } = req.body;
+    try {
+        const users = await User.find();
+        // sendToken(user, 200, res);
+        res.json({ sucess: true, users });
+    } catch (err) {
+        console.log(err, "register err");
+        next(err);
+    }
+};
+
+
 const sendToken = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
     res
